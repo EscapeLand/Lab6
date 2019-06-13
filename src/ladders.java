@@ -6,6 +6,8 @@ public class ladders {
   public ladder[] ladderList;
   public int ladderNumber;
   public int rungNumber;
+  public static int leftnum = 0;
+  public static int rightnum = 0;
 
   public ladders(int ladderNumber,int rungNumber) {
     this.ladderNumber = ladderNumber;
@@ -33,13 +35,16 @@ public class ladders {
     }
     return sb.toString();
   }
+
+
 }
 class ladder{
- public int rungNumber;
- public rung[] rungList;
- public int dir ;
- public int monkeyNum=0;
- public int finish = 0;
+  public int rungNumber;
+  public rung[] rungList;
+  public int dir ;
+  public int monkeyNum=0;
+  public int finish = 0;
+  public int speed;
 
   public ladder(int rungNumber) {
     this.rungNumber = rungNumber;
@@ -62,7 +67,9 @@ class ladder{
           else{
             rungList[i].monkey.rNum = checkLR(i,rungList[i].monkey.getVelocity());
             rungList[checkLR(i,rungList[i].monkey.getVelocity())].monkey = rungList[i].monkey;
+            speed = Math.abs(checkLR(i,rungList[i].monkey.getVelocity()) - i);
             rungList[i].monkey = null;
+
           }
         }
         else{
@@ -80,8 +87,9 @@ class ladder{
             monkeyNum--;
           }
           else{
-            rungList[i].monkey.rNum = checkLR(i,rungList[i].monkey.getVelocity());
+            rungList[i].monkey.rNum = checkRL(i,rungList[i].monkey.getVelocity());
             rungList[checkRL(i,rungList[i].monkey.getVelocity())].monkey = rungList[i].monkey;
+            speed = Math.abs(checkRL(i,rungList[i].monkey.getVelocity()) - i);
             rungList[i].monkey = null;
           }
         }

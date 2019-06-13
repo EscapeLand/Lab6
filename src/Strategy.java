@@ -8,7 +8,7 @@ public class Strategy {
       case 1:
         return first(la,mo);
       case 2:
-        return zero(la,mo);
+        return second(la,mo);
         default:
           return zero(la,mo);
     }
@@ -18,9 +18,11 @@ public class Strategy {
       for (int i = 0; i < la.ladderNumber; i++) {
         if (la.ladderList[i].monkeyNum == 0) {
           la.ladderList[i].rungList[0].monkey = mo;
-          mo.lNum = i;
+          mo.lNum = la.ladderList[i];
+          mo.lnum = i;
           mo.rNum = 0;
           mo.direction="on";
+          la.ladderList[i].speed = mo.getVelocity();
           la.ladderList[i].monkeyNum++;
           la.ladderList[i].dir = 0;
           return true;
@@ -31,8 +33,10 @@ public class Strategy {
       for (int i = 0; i < la.ladderNumber; i++) {
         if (la.ladderList[i].monkeyNum == 0) {
           la.ladderList[i].rungList[la.ladderList[i].rungNumber-1].monkey = mo;
-          mo.lNum = i;
-          mo.rNum = 0;
+          la.ladderList[i].speed = mo.getVelocity();
+          mo.lNum = la.ladderList[i];
+          mo.lnum = i;
+          mo.rNum = la.ladderList[i].rungNumber-1;
           mo.direction="on";
           la.ladderList[i].monkeyNum++;
           la.ladderList[i].dir = 1;
@@ -49,11 +53,11 @@ public class Strategy {
       for (int i = 0; i < la.ladderNumber; i++){
         if(change(mo) == la.ladderList[i].dir && la.ladderList[i].rungList[getfirst(num,mo)].monkey==null){
           la.ladderList[i].rungList[getfirst(num,mo)].monkey = mo;
-          mo.lNum = i;
-          mo.rNum = 0;
+          mo.lNum = la.ladderList[i];
+          mo.lnum = i;
+          mo.rNum = getfirst(num,mo);
           mo.direction="on";
           la.ladderList[i].monkeyNum++;
-          la.ladderList[i].dir = change(mo);
           return true;
         }
       }
@@ -63,6 +67,37 @@ public class Strategy {
     }
 
     return false;
+  }
+
+  synchronized boolean second(ladders la,monkey mo){
+    if(!zero(la,mo)) {
+      int result = -1;
+      int det = 100;
+      int num = la.rungNumber;
+      for (int i = 0; i < la.ladderNumber; i++){
+        if(change(mo) == la.ladderList[i].dir && la.ladderList[i].rungList[getfirst(num,mo)].monkey==null){
+          int newDet = Math.abs(mo.getVelocity() - la.ladderList[i].speed );
+          if(newDet< det){
+            result = i;
+            det = newDet;
+          }
+        }
+      }
+      if(result == -1) return false;
+      else{
+        la.ladderList[result].rungList[getfirst(num,mo)].monkey = mo;
+        mo.lNum = la.ladderList[result];
+        mo.lnum = result;
+        mo.rNum = getfirst(num,mo);
+        mo.direction="on";
+        la.ladderList[result].monkeyNum++;
+        return true;
+      }
+    }
+    else{
+      return true;
+    }
+
   }
 
   int change(monkey mo) {

@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a9360df-3fda-4f75-a6fc-4d80b1379e94" name="默认更改列表" comment="" />
+    <list default="true" id="6a9360df-3fda-4f75-a6fc-4d80b1379e94" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CrossGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/MonkeyGenerator$MonkeyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/MonkeyGenerator$MonkeyThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/MonkeyGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/MonkeyGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/Strategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/Strategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/ladder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/ladder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/monkey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/monkey.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Lab6-1170300429/rung.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lab6-1170300429/rung.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MonkeyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MonkeyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Strategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ladders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ladders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/monkey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/monkey.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Strategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="463">
+              <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -23,9 +38,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/monkey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state>
+              <caret column="25" selection-start-column="25" selection-end-column="25" />
               <folding>
+                <element signature="e#385#386#0" expanded="true" />
                 <element signature="e#410#411#0" expanded="true" />
                 <element signature="e#438#439#0" expanded="true" />
                 <element signature="e#461#462#0" expanded="true" />
@@ -37,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ladders.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="105" column="35" lean-forward="true" selection-start-line="105" selection-start-column="35" selection-end-line="105" selection-end-column="35" />
+            <state relative-caret-position="1026">
+              <caret line="69" column="78" selection-start-line="69" selection-start-column="78" selection-end-line="69" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,12 +68,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MonkeyGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="101" column="18" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+            <state relative-caret-position="270">
+              <caret line="191" column="37" selection-start-line="191" selection-start-column="37" selection-end-line="191" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="initializer##0;class#MonkeyGenerator#0" />
                 <element signature="e#1613#1614#0" expanded="true" />
                 <element signature="e#1642#1643#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="113" column="1" lean-forward="true" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#promptForm#0;class#GUI#0" />
+                <element signature="method#prompt#0;class#GUI#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CrossGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="53" column="46" lean-forward="true" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,24 +115,31 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/strategy/firstStrategy.java" />
         <option value="$PROJECT_DIR$/src/strategy/Strategy.java" />
         <option value="$PROJECT_DIR$/src/MonkeyGo.java" />
-        <option value="$PROJECT_DIR$/src/monkey.java" />
         <option value="$PROJECT_DIR$/src/Strategy.java" />
-        <option value="$PROJECT_DIR$/src/MonkeyGenerator.java" />
+        <option value="$PROJECT_DIR$/src/GUI.java" />
+        <option value="$PROJECT_DIR$/src/monkey.java" />
         <option value="$PROJECT_DIR$/src/ladders.java" />
+        <option value="$PROJECT_DIR$/src/MonkeyGenerator.java" />
+        <option value="$PROJECT_DIR$/src/CrossGUI.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-9" />
-    <option name="width" value="977" />
-    <option name="height" value="1040" />
+    <option name="x" value="-276" />
+    <option name="y" value="51" />
+    <option name="width" value="983" />
+    <option name="height" value="1046" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -116,6 +166,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="C:/Program Files/Java/jdk-11.0.3" />
   </component>
   <component name="RunDashboard">
@@ -130,7 +181,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MonkeyGenerator">
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI" />
+      <module name="Lab6-1170300429" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MonkeyGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MonkeyGenerator" />
       <module name="Lab6-1170300429" />
@@ -141,6 +199,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MonkeyGenerator" />
+        <item itemvalue="Application.GUI" />
       </list>
     </recent_temporary>
   </component>
@@ -170,7 +229,7 @@
       <window_info id="设计器" />
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14551282" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16923077" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Run with VisualVM" />
       <window_info anchor="bottom" id="CheckStyle" />
@@ -182,7 +241,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.328877" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4104278" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3409091" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -194,15 +253,43 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info id="设计器" order="0" />
+      <window_info id="UI Designer" order="1" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.16923077" />
+      <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="CheckStyle" order="0" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="1" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="2" />
+      <window_info anchor="bottom" id="Messages" order="3" weight="0.328877" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="5" />
+      <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="调试" order="7" weight="0.4237968" />
+      <window_info anchor="bottom" id="Message" order="8" />
+      <window_info anchor="bottom" id="Find" order="9" />
+      <window_info active="true" anchor="bottom" id="Run" order="10" visible="true" weight="0.3409091" />
+      <window_info anchor="bottom" id="Debug" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="12" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="13" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="14" weight="0.328877" />
+      <window_info anchor="right" id="调色板" order="0" />
+      <window_info anchor="right" id="Palette&#9;" order="1" />
+      <window_info anchor="right" id="Maven" order="2" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="3" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/MonkeyGenerator.java</url>
-          <line>99</line>
+          <url>file://$PROJECT_DIR$/src/CrossGUI.java</url>
+          <line>44</line>
           <properties />
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -253,30 +340,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Strategy.java">
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.3/lib/src.zip!/java.base/java/lang/Integer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        <state relative-caret-position="479">
+          <caret line="613" column="18" selection-start-line="613" selection-start-column="18" selection-end-line="613" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonkeyGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/Strategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="101" column="18" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1613#1614#0" expanded="true" />
-            <element signature="e#1642#1643#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="463">
+          <caret line="57" column="36" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/monkey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
           <folding>
+            <element signature="e#385#386#0" expanded="true" />
             <element signature="e#410#411#0" expanded="true" />
             <element signature="e#438#439#0" expanded="true" />
             <element signature="e#461#462#0" expanded="true" />
@@ -289,8 +372,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ladders.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="105" column="35" lean-forward="true" selection-start-line="105" selection-start-column="35" selection-end-line="105" selection-end-column="35" />
+        <state relative-caret-position="1026">
+          <caret line="69" column="78" selection-start-line="69" selection-start-column="78" selection-end-line="69" selection-end-column="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MonkeyGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="191" column="37" selection-start-line="191" selection-start-column="37" selection-end-line="191" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="initializer##0;class#MonkeyGenerator#0" />
+            <element signature="e#1613#1614#0" expanded="true" />
+            <element signature="e#1642#1643#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="113" column="1" lean-forward="true" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#promptForm#0;class#GUI#0" />
+            <element signature="method#prompt#0;class#GUI#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CrossGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="53" column="46" lean-forward="true" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

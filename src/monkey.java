@@ -1,12 +1,17 @@
 import java.util.Objects;
 
+
 public class monkey{
   public int id;
   private int velocity;
   public String direction;
   private int choose;
-  public int lNum;
+  public ladder lNum;
+  public int lnum;
   public int rNum;
+  public long t = -1;
+  public long start;
+  public long end;
 
   public monkey(int id, int velocity, String direction, int choose) {
     this.id = id;
