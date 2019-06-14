@@ -47,7 +47,7 @@ public class CrossGUI extends JFrame {
         final int t3 = 42 + 600 / n * i + 220 / n;
         if (Ladder.ladders[i].monkeys[j] != null
             && Ladder.ladders[i].dir == Dir.R) {
-          g.setColor(Color.white);
+          g.setColor(Color.PINK);
           g.fillOval(t1, t2, 200 / n + 4,
               200 / n + 4);
           g.setColor(Color.BLACK);
@@ -56,7 +56,7 @@ public class CrossGUI extends JFrame {
               25 + 740 / (h + 1) * (j + 1) - 20 / n, t3);
         } else if (Ladder.ladders[i].monkeys[j] != null
             && Ladder.ladders[i].dir == Dir.L) {
-          g.setColor(Color.lightGray);
+          g.setColor(Color.ORANGE);
           g.fillOval(t1, t2, 200 / n + 4,
               200 / n + 4);
           g.setColor(Color.BLACK);
