@@ -49,14 +49,16 @@ class MonkeyGenerator {
     for (int j = 0; j < n; j++) {
       int random = rnd.nextInt(2);
       Monkey newm = new Monkey(num++, rnd.nextInt(1, MV + 1), random == 0 ? Dir.R : Dir.L,
-          rnd.nextInt(3));
+          //rnd.nextInt(3)
+      2
+      );
       monkeys.add(newm);
       Main.cachedThreadPool.execute(newm.run);
     }
   }
 
 
-  void writeLogging() {
+  private void writeLog() {
     var endTime = System.currentTimeMillis();
     int s = (int) ((endTime - startTime) / 1000.0);
 
@@ -104,7 +106,7 @@ class MonkeyGenerator {
   static void start() throws InterruptedException {
     GUIHelper g = new GUIHelper();
     //MonkeyGenerator mg = g.choose();
-    var mg = new MonkeyGenerator(10, 20, 1, 20, 5, 5);
+    var mg = new MonkeyGenerator(10, 20, 1, 500, 20, 20);
 
     Main.cachedThreadPool.execute(() -> {
       if (mg != null) {
@@ -118,7 +120,6 @@ class MonkeyGenerator {
 
     CrossGUI cg = new CrossGUI();
     //System.out.println(mg.monkeys.size());
-    sleep(1000);
     while (Ladder.countFinish() != mg.monkeys.size()) {
       sleep(1000);
       for (Ladder l : Ladder.ladders) {
@@ -126,7 +127,7 @@ class MonkeyGenerator {
       }
       synchronized (mg) {
         //Ladder.printLadder();
-        mg.writeLogging();
+        mg.writeLog();
         cg.setVisible(true);
         cg.dualBufferedPainting();
       }

@@ -49,6 +49,7 @@ public class Ladder {
   }
 
   void move() {
+    if(dir == null) return;
     assert dir == Dir.L || dir == Dir.R;
 
     if (dir == Dir.R) {
