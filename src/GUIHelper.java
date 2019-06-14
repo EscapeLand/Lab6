@@ -1,7 +1,4 @@
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
@@ -12,9 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-public class GUI {
-  public String[] promptForm(JFrame owner, String title) {
-    String[] form = {"梯子数量","猴子生成间隔时间","猴子总数","每次生成猴子数量","最大速度"};
+class GUIHelper {
+
+  String[] promptForm(JFrame owner, String title, String[] form) {
     JTextField[] formArray = new JTextField[form.length];
     String[] input = new String[form.length];
 
@@ -55,7 +52,8 @@ public class GUI {
     dialog.setVisible(true);
     return input;
   }
-  public static String prompt(JFrame owner, String title, String msg, String def) {
+
+  static String prompt(JFrame owner, String title, String msg, String def) {
     StringBuffer p = new StringBuffer();
     class PromptDialog extends JDialog {
 
@@ -99,16 +97,15 @@ public class GUI {
     return p.toString();
   }
 
-  public MonkeyGenerator choose() {
-    String p = prompt(null, "选择", "1.随机生成   2.读入文件", "1");
-    if(p.equals("1")){
-      String [] s = promptForm(null,"输入");
-      return new MonkeyGenerator(Integer.valueOf(s[0]),20,Integer.valueOf(s[1]),Integer.valueOf(s[2]),Integer.valueOf(s[3]),Integer.valueOf(s[4]));
+  MonkeyGenerator choose() {
+    final String p = prompt(null, "Select Generator",
+        "1. Random Generator\n2. File Reading Generator", "1");
+    final String[] form = {"Ladder num", "Generate Interval", "Monkey num", "Monkey each generation", "Max velocity"};
+    if (p.equals("1")) {
+      String[] s = promptForm(null, "Input Args", form);
+      return new MonkeyGenerator(Integer.valueOf(s[0]), 20, Integer.valueOf(s[1]),
+          Integer.valueOf(s[2]), Integer.valueOf(s[3]), Integer.valueOf(s[4]));
     }
     return null;
-  }
-  public static void main(String[] args) {
-    GUI g = new GUI();
-    g.choose();
   }
 }

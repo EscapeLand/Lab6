@@ -5,19 +5,16 @@ public class Ladder {
   static int h;
 
 
-  public final int rungNumber;
-  public final rung[] rungList;
-  public Dir dir;
-  public int monkeyNum = 0;
-  public int finish = 0;
-  public int speed;
+  final Monkey[] monkeys;
+  Dir dir;
+  private int monkeyNum = 0;
+  private int finish = 0;
+  private int tailSpeed = MonkeyGenerator.MV;
+  private int ID;
 
-  Ladder(int rungNumber) {
-    this.rungNumber = rungNumber;
-    rungList = new rung[rungNumber];
-    for (int i = 0; i < rungNumber; i++) {
-      rungList[i] = new rung();
-    }
+  private Ladder(int ID, int rungNumber) {
+    this.ID = ID;
+    monkeys = new Monkey[rungNumber];
   }
 
   static void init(int ladderNumber, int rungNumber) {
@@ -26,107 +23,120 @@ public class Ladder {
     n = ladderNumber;
     ladders = new Ladder[n];
     for (int i = 0; i < ladderNumber; i++) {
-      ladders[i] = new Ladder(h);
+      ladders[i] = new Ladder(i, h);
     }
   }
 
-  static int checkFinish() {
-    int tmp = 0;
+  static int countFinish() {
+    int sum = 0;
     for (Ladder l : ladders) {
-      tmp = tmp + l.finish;
+      sum = sum + l.finish;
     }
-    return tmp;
+    return sum;
   }
 
-  public static String printLadder(Ladder[] ladders) {
+  @SuppressWarnings("unused")
+  static void printLadder() {
     StringBuilder sb = new StringBuilder();
     for (Ladder l : ladders) {
       sb.append(l.toString()).append('\n');
     }
-    return sb.toString();
+    System.out.println(sb.toString());
+  }
+
+  private static int startAt(Dir dir){
+    return dir == Dir.R ? 0 : h - 1;
   }
 
   void move() {
+    assert dir == Dir.L || dir == Dir.R;
+
     if (dir == Dir.R) {
-      for (int i = rungNumber - 1; i >= 0; i--) {
-        if (rungList[i].monkey != null) {
-          if (i == rungNumber - 1 || (i + rungList[i].monkey.getVelocity() > rungNumber - 1
-              && checkLR(i, rungList[i].monkey.getVelocity()) == i + rungList[i].monkey
-              .getVelocity())) {
-            rungList[i].monkey.direction = Dir.OFF;
-            rungList[i].monkey = null;
+      for (int i = h - 1; i >= 0; i--) {
+        if (monkeys[i] != null) {
+          if (checkLR(i) > h - 1) {
+            monkeys[i].dir = Dir.OFF;
+            monkeys[i] = null;
             finish++;
             monkeyNum--;
+            tailSpeed = MonkeyGenerator.MV;
           } else {
-            rungList[i].monkey.rNum = checkLR(i, rungList[i].monkey.getVelocity());
-            rungList[checkLR(i, rungList[i].monkey.getVelocity())].monkey = rungList[i].monkey;
-            speed = Math.abs(checkLR(i, rungList[i].monkey.getVelocity()) - i);
-            rungList[i].monkey = null;
-
+            monkeys[i].rNum = checkLR(i);
+            monkeys[checkLR(i)] = monkeys[i];
+            tailSpeed = Math.abs(checkLR(i) - i);
+            monkeys[i] = null;
           }
         }
       }
-    } else if (dir == Dir.L) {
-      for (int i = 0; i < rungNumber; i++) {
-        if (rungList[i].monkey != null) {
-          if (i == 0 || (i - rungList[i].monkey.getVelocity() < 0
-              && checkRL(i, rungList[i].monkey.getVelocity()) == i - rungList[i].monkey
-              .getVelocity())) {
-            rungList[i].monkey.direction = Dir.OFF;
-            rungList[i].monkey = null;
+    } else {
+      for (int i = 0; i < h; i++) {
+        if (monkeys[i] != null) {
+          if (checkRL(i) < 0) {
+            monkeys[i].dir = Dir.OFF;
+            monkeys[i] = null;
             finish++;
             monkeyNum--;
+            tailSpeed = MonkeyGenerator.MV;
           } else {
-            rungList[i].monkey.rNum = checkRL(i, rungList[i].monkey.getVelocity());
-            rungList[checkRL(i, rungList[i].monkey.getVelocity())].monkey = rungList[i].monkey;
-            speed = Math.abs(checkRL(i, rungList[i].monkey.getVelocity()) - i);
-            rungList[i].monkey = null;
+            monkeys[i].rNum = checkRL(i);
+            monkeys[checkRL(i)] = monkeys[i];
+            tailSpeed = Math.abs(checkRL(i) - i);
+            monkeys[i] = null;
           }
         }
       }
     }
   }
 
-  private int checkLR(int i, int MV) {
-    int num;
-    if (i + MV > rungNumber - 1) {
-      num = rungNumber - 1;
-    } else {
-      num = i + MV;
-    }
-    for (i = i + 1; i <= num; i++) {
-      if (rungList[i].monkey != null) {
+  private int checkLR(int pos) {
+    var brace = pos + monkeys[pos].MV;
+    for (int i = pos + 1, l = Math.min(brace, h - 1); i <= l; i++) {
+      if (monkeys[i] != null) {
         return i - 1;
       }
     }
-    return num;
+    return brace;
   }
 
-  private int checkRL(int i, int MV) {
-    int num;
-    if (i - MV < 0) {
-      num = 0;
-    } else {
-      num = i - MV;
-    }
-    for (i = i - 1; i >= num; i--) {
-      if (rungList[i].monkey != null) {
+  private int checkRL(int pos) {
+    int brace = pos - monkeys[pos].MV;
+    for (int i = pos - 1, l = Math.max(0, brace); i >= l; i--) {
+      if (monkeys[i] != null) {
         return i + 1;
       }
     }
-    return num;
+    return brace;
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (rung r : rungList) {
-      sb.append(r.monkey == null ? 0 : r.monkey.ID).append(" ");
+    for (var monkey : monkeys) {
+      sb.append(monkey == null ? 0 : monkey.ID).append(" ");
     }
     return sb.toString();
   }
-}
 
-class rung {
-  Monkey monkey;
+  int tailSpeed() {
+    return tailSpeed;
+  }
+
+  int size() {
+    return monkeyNum;
+  }
+
+  void addMonkey(Monkey monkey){
+    var i = startAt(monkey.dir);
+    assert monkeys[i] == null;
+    monkeys[i] = monkey;
+    monkey.rNum = i;
+    monkey.lNum = ID;
+    monkeyNum++;
+    dir = monkey.dir;
+    monkey.dir = Dir.ON;
+  }
+
+  boolean firstEmpty(Dir dir){
+    return monkeys[startAt(dir)] == null;
+  }
 }

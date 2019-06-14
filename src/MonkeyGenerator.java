@@ -3,18 +3,17 @@ import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class MonkeyGenerator {
+class MonkeyGenerator {
 
   private long startTime = System.currentTimeMillis();
 
   private int num = 0;
-  final int N;
-  final int k;
-  final int MV;
-  final int t;
+  static int N;
+  static int k;
+  static int MV;
+  static int t;
   private double MBps;
   private double fairness;
 
@@ -31,20 +30,18 @@ public class MonkeyGenerator {
 
   MonkeyGenerator(int n, int h, int t, int N, int k, int MV) {
     Ladder.init(n, h);
-    this.N = N;
-    this.k = k;
-    this.MV = MV;
-    this.t = t * 1000;
+    MonkeyGenerator.N = N;
+    MonkeyGenerator.k = k;
+    MonkeyGenerator.MV = MV;
+    MonkeyGenerator.t = t * 1000;
   }
 
-  boolean create() throws InterruptedException {
+  private void create() throws InterruptedException {
     for (int i = 0, s = N / k; i < s; i++) {
       birth(k);
       sleep(t);
     }
     birth(N % k);
-
-    return monkeys.size() == N;
   }
 
   private void birth(int n) {
@@ -65,31 +62,31 @@ public class MonkeyGenerator {
 
     for (int i = 0; i < monkeys.size(); i++) {
       Monkey mo = monkeys.get(i);
-      if (mo.direction == Dir.R) {
-        Main.logger.info(mo.ID + " 正在左岸等待，离出生已" + s + "秒");
-      } else if (mo.direction == Dir.L) {
-        Main.logger.info(mo.ID + " 正在右岸等待，离出生已" + s + "秒");
-      } else if (mo.direction == Dir.ON && mo.lNum.dir == Dir.R) {
-        Main.logger.info(mo.ID
-            + " 正在第" + mo.lnum + "架梯子的第" + mo.rNum + "个踏板上，自左向右行进，离出生已"
-            + s + "秒 ");
-      } else if (mo.direction == Dir.ON && mo.lNum.dir == Dir.L) {
-        Main.logger.info(mo.ID
-            + " 正在第" + mo.lnum + "架梯子的第" + mo.rNum + "个踏板上，自右向左行进，离出生已"
-            + s + "秒 ");
-      } else if (mo.direction == Dir.OFF && mo.t < 0 && mo.lNum.dir == Dir.R) {
+      if (mo.dir == Dir.R) {
+        Main.logger.info("Monkey(" + mo.ID + ") waiting at left shell, " + s + "s from birth. ");
+      } else if (mo.dir == Dir.L) {
+        Main.logger.info("Monkey(" + mo.ID + ") waiting at right shell, " + s + "s from birth. ");
+      } else if (mo.dir == Dir.ON && Ladder.ladders[mo.lNum].dir == Dir.R) {
+        Main.logger.info("Monkey(" + mo.ID
+            + ") on Ladder(" + mo.lNum + "), Rung(" + mo.rNum + "). L->R, "
+            + s + "s from birth. ");
+      } else if (mo.dir == Dir.ON && Ladder.ladders[mo.lNum].dir == Dir.L) {
+        Main.logger.info("Monkey(" + mo.ID
+            + ") on Ladder(" + mo.lNum + "), Rung(" + mo.rNum + "). R->L, "
+            + s + "s from birth. ");
+      } else if (mo.dir == Dir.OFF && mo.t < 0 && Ladder.ladders[mo.lNum].dir == Dir.R) {
         mo.t = s;
         mo.end = endTime;
-        Main.logger.info(mo.ID + " 已从左岸抵达右岸，共耗时" + mo.t + "秒 ");
-      } else if (mo.direction == Dir.OFF && mo.t < 0 && mo.lNum.dir == Dir.L) {
+        Main.logger.info("Monkey(" + mo.ID + ")has reached right shell, " + mo.t + "s cost. ");
+      } else if (mo.dir == Dir.OFF && mo.t < 0 && Ladder.ladders[mo.lNum].dir == Dir.L) {
         mo.end = endTime;
         mo.t = s;
-        Main.logger.info(mo.ID + " 已从右岸抵达左岸，共耗时" + mo.t + "秒 ");
+        Main.logger.info("Monkey(" + mo.ID + ")has reached left shell, " + mo.t + "s cost. ");
       }
     }
   }
 
-  public double calculateFair() {
+  private double calculateFair() {
     double fairness = 0;
     for (int i = 0; i < monkeys.size() - 1; i++) {
       for (int j = i + 1; j < monkeys.size(); j++) {
@@ -104,9 +101,10 @@ public class MonkeyGenerator {
     return fairness / (N * (N - 1) / 2.0);
   }
 
-  public static void start() throws InterruptedException {
-    GUI g = new GUI();
-    MonkeyGenerator mg = g.choose();
+  static void start() throws InterruptedException {
+    GUIHelper g = new GUIHelper();
+    //MonkeyGenerator mg = g.choose();
+    var mg = new MonkeyGenerator(10, 20, 1, 20, 5, 5);
 
     Main.cachedThreadPool.execute(() -> {
       if (mg != null) {
@@ -118,25 +116,39 @@ public class MonkeyGenerator {
       }
     });
 
-    CrossGUI cg = new CrossGUI(mg);
-    cg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    System.out.println(mg.monkeys.size());
+    CrossGUI cg = new CrossGUI();
+    //System.out.println(mg.monkeys.size());
     sleep(1000);
-    while (Ladder.checkFinish() != mg.monkeys.size()) {
+    while (Ladder.countFinish() != mg.monkeys.size()) {
       sleep(1000);
       for (Ladder l : Ladder.ladders) {
         l.move();
       }
       synchronized (mg) {
+        //Ladder.printLadder();
         mg.writeLogging();
         cg.setVisible(true);
-        cg.repaint();
+        cg.dualBufferedPainting();
       }
+      cg.repaint();
     }
     double s = (System.currentTimeMillis() - mg.startTime) / 1000.0;
-    mg.MBps = mg.N / s;
+    mg.MBps = N / s;
     mg.fairness = mg.calculateFair();
-    JOptionPane.showMessageDialog(cg, "used " + s + " s", "Finished", JOptionPane.PLAIN_MESSAGE);
+    JOptionPane.showMessageDialog(cg,
+        "used " + s + " s\nMBps = " + mg.MBps + "\nFairness = " + mg.fairness, "Finished",
+        JOptionPane.PLAIN_MESSAGE);
+  }
+
+  @SuppressWarnings("unused")
+  private List<Monkey> findAllUnload() {
+    ArrayList<Monkey> ms = new ArrayList<>();
+    monkeys.forEach(m -> {
+      if (m.dir != Dir.OFF) {
+        ms.add(m);
+      }
+    });
+    return ms;
   }
 }
 

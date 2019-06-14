@@ -1,35 +1,36 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class CrossGUI extends JFrame {
 
-  MonkeyGenerator mg;
-  private static Font defaultFont = new Font("Tahoma", Font.BOLD, 15);
+  private static Font defaultFont = new Font("Times New Roman", Font.BOLD, 16);
   private final int n;
-  private final int t;
   private final int h;
   private final int N;
-  private final int k;
-  private final int MV;
+  private Image img;
 
-  public CrossGUI(MonkeyGenerator mg) {
+  CrossGUI() {
     this.n = Ladder.n;
-    this.t = mg.t;
     this.h = 20;
-    this.N = mg.N;
-    this.k = mg.k;
-    this.MV = mg.MV;
-    this.mg = mg;
+    this.N = MonkeyGenerator.N;
     this.setTitle("Demo");
-    this.setBounds(300, 0, 800, 750);
+    this.setBounds(300, 100, 800, 720);
     this.setLayout(null);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setResizable(false);
   }
 
-  @Override
-  public void paint(Graphics g) {
-    super.paint(g);
+  void dualBufferedPainting(){
+    img = createImage(getWidth(), getHeight());
+    var g = (Graphics2D) img.getGraphics();
+    g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
     g.setColor(Color.BLACK);
     for (int i = 0; i < n; i++) {
       g.drawLine(30, 40 + 600 / n * i, 770, 40 + 600 / n * i);
@@ -42,25 +43,25 @@ public class CrossGUI extends JFrame {
     for (int i = 0; i < Ladder.n; i++) {
       for (int j = 0; j < Ladder.h; j++) {
         final int t1 = 30 + 740 / (h + 1) * (j + 1) - 100 / n;
-        final int t2 = 45 + 600 / n * i + 100 / n;
-        final int t3 = 45 + 600 / n * i + 220 / n;
-        if (Ladder.ladders[i].rungList[j].monkey != null
+        final int t2 = 39 + 600 / n * i + 100 / n;
+        final int t3 = 42 + 600 / n * i + 220 / n;
+        if (Ladder.ladders[i].monkeys[j] != null
             && Ladder.ladders[i].dir == Dir.R) {
           g.setColor(Color.white);
-          g.fillOval(t1, t2, 200 / n,
-              200 / n);
+          g.fillOval(t1, t2, 200 / n + 4,
+              200 / n + 4);
           g.setColor(Color.BLACK);
           g.setFont(defaultFont);
-          g.drawString(Ladder.ladders[i].rungList[j].monkey.ID + ">",
+          g.drawString(Ladder.ladders[i].monkeys[j].ID + ">",
               25 + 740 / (h + 1) * (j + 1) - 20 / n, t3);
-        } else if (Ladder.ladders[i].rungList[j].monkey != null
+        } else if (Ladder.ladders[i].monkeys[j] != null
             && Ladder.ladders[i].dir == Dir.L) {
           g.setColor(Color.lightGray);
-          g.fillOval(t1, t2, 200 / n,
-              200 / n);
+          g.fillOval(t1, t2, 200 / n + 4,
+              200 / n + 4);
           g.setColor(Color.BLACK);
           g.setFont(defaultFont);
-          g.drawString("<" + Ladder.ladders[i].rungList[j].monkey.ID,
+          g.drawString("<" + Ladder.ladders[i].monkeys[j].ID,
               20 + 740 / (h + 1) * (j+1) - 20 / n, t3);
         }
       }
@@ -69,9 +70,13 @@ public class CrossGUI extends JFrame {
     g.setFont(defaultFont);
     g.drawString("Monkey Number = " + N, 30, 630);
     g.drawString("Ladder Number = " + n, 30, 650);
-    g.drawString("Finished Monkey = " + Ladder.checkFinish(), 30, 670);
-    g.drawString("Mbps = " + mg.getMBps(), 30, 690);
-    g.drawString("Fairness = " + mg.getFairness(), 30, 710);
+    g.drawString("Finished Monkey = " + Ladder.countFinish(), 30, 670);
+  }
+
+  @Override
+  public void paint(Graphics g) {
+    super.paint(g);
+    g.drawImage(img, 0, 0, this);
   }
 }
 
