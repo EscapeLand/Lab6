@@ -1,6 +1,6 @@
 
 class Strategy {
-  static boolean choose(int choose, Monkey mo){
+  static boolean choose(Monkey mo, int choose){
     switch(choose){
       case 0:
         return naive(mo);

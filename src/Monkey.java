@@ -18,7 +18,7 @@ public class Monkey {
 
   final Runnable run = () -> {
     start = System.currentTimeMillis();
-    while (!Strategy.choose(choose, this)) {
+    while (!Strategy.choose(this, choose)) {
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
